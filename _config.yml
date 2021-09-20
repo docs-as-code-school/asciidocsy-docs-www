@@ -1,0 +1,118 @@
+# This file configures the AsciiDocsy Theme Documentation site itself.
+title: AsciiDocsy Theme Documentation
+name:  AsciiDocsy
+tagline: An AsciiDoc-ready Jekyll theme for technical documentation
+deploy_url: https://asciidocsy.netlify.app # your site's URL
+canonical_url: https://asciidocsy.netlify.app # URL of original content
+# DO NOT CHANGE the canonical URL if you deploy a copy the AsciiDocsy docs site
+# DO change it if you replace all the content or start from scratch
+company_name: DocOps Lab
+theme: asciidocsy
+
+# SITEWIDE JEKYLL SETTINGS
+baseurl: "" # Leave blank if your site will deploy at the root of a domain
+            #  such as http://docs.yourcompany.com/
+# The following paths are all relative to the project base
+source: .
+destination: _site
+layouts_dir: _layouts
+includes_dir: _includes
+
+# Global AsciiDocsy settings
+sass:
+  sass_dir: _sass
+theme_dir: assets # <1> path to asset directories (css/ images/ js/ etc)
+assets_url: assets
+source_git: git@github.com:DocOps/asciidocsy-jekyll-theme.git # git@-formatted address
+source_www: https://github.com/DocOps/asciidocsy-jekyll-theme
+source_icon: fa fa-github
+source_trunk_branch: main # path from repo home url to projet root
+subject_tickets_www: https://github.com/DocOps/asciidocsy-jekyll-theme/issues
+docs_tickets_www: https://github.com/DocOps/asciidocsy-jekyll-theme/issues
+
+# Application-specific settings/paths
+subjects:
+  asciidocsy:
+    paths:
+      topics:
+        source: subjects/asciidocsy/_docs/topics/**
+        target: content/topics/asciidocsy
+      snippets:
+        source: subjects/asciidocsy/_docs/snippets/**
+        target: content/snippets/asciidocsy
+      data:
+        source: subjects/asciidocsy/lib/asciidocsy/data/**
+        target: _data/subjects/asciidocsy
+
+# tag::asciidoctor[]
+asciidoc: {}
+asciidoctor:
+  ext: adoc
+  safe: 0
+  base_dir: .
+  attributes:
+    outfilesuffix: ''
+    example-capition: ''
+    experimental: # enables Asciidoctor experimental mode (quite safe)
+    imagesdir: /assets/images
+    icons: font
+    source-highlighter: highlight.js
+    topics_path: content/topics
+    ### paths from topic_path to root files
+    includedir: .
+    path_to_jekyll_config: _config.yml
+    path_to_snippets: content/snippets/asciidocsy
+    path_to_readme: content/snippets/asciidocsy/README.adoc
+    path_to_data_dir: _data
+# end::asciidoctor[]
+
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Default PAGE scopes for content sourced in certain paths
+defaults:
+  - scope:
+      path: ""
+    values:
+      search-index: false
+      style-changers: false
+  - scope:
+      path: pages/
+    values:
+      layout: page
+      kind: page
+      sidebar-left: true
+      sidebar-right: true
+  - scope:
+      path: content/topics/
+    values:
+      layout: topic
+      kind: topic
+      sidebar-left: true
+      sidebar-right: true
+      search-index: true
+      anchors: true
+      toc: [sidebar]
+
+# Paths to render with Jekyll that would not be rendered by default
+include:
+  - content
+  - _data/terms-dict.json
+  - content/theme-api.asciidoc
+
+# Paths to skip that would normally be rendered
+exclude:
+  - README.adoc
+  - "**/README.adoc" # if we want content from READMEs, we include:: it
+  - COPYRIGHT
+  - LICENSE
+  - content/snippets
+  - subjects
+
+# tag::algolia[]
+algolia:
+  application_id: 'SELDDHION6'
+  search_only_api_key: 'b9112b0485d58729c3e7c7b64291cbd9'
+# end::algolia[]

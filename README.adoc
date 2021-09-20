@@ -1,0 +1,91 @@
+= AsciiDocsy Theme Documentation (Site)
+// tag::globals[]
+:prod_vrsn_this: 0.3.0
+:prod_date_this: 2021-09-21
+:prod_vrsn_next: 0.4.0
+:experimental:
+:imagesdir: images
+:forked_source_www: https://vsoch.github.io
+:theme_demo_www: https://asciidocsy.netlify.app
+:theme_docs_www: https://asciidocsy.netlify.app/docs
+:theme_docs_repo_www: https://github.com/DocOps/asciidocsy-docs-www
+:theme_docs_repo_git: git@github.com:DocOps/asciidocsy-docs-www.git
+:theme_docs-environment_www: {theme_docs_www}/theme/setup/environment
+:theme_docs-bootstrapping_www: {theme_docs_www}/theme/setup/bootstrap
+:theme_repo_www: https://github.com/DocOps/asciidocsy-jekyll-theme
+:theme_repo_git: git@github.com:DocOps/asciidocsy-jekyll-theme.git
+:project_issues_path: https://github.com/DocOps/asciidocsy-jekyll-theme/issues
+// end::globals[]
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:status:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+This repository contains the technical documentation for the link:{theme_repo_www}[AsciiDocsy Jekyll Theme].
+
+The link:{theme_docs_www}[rendered documentation] uses the AsciiDocsy theme, of course.
+
+[[build-the-docs]]
+== Build the Docs
+// tag::quickstart-build[]
+With a link:{theme_docs-environment_www}[Ruby environment in place], these steps will perform a local build of the AsciiDocsy Documentation site.
+
+. Clone (or download and inflate) this repo.
++
+.Clone
+[subs=+attributes]
+ git clone {theme_repo_git}
++
+.Download & inflate
+--
+image::github-repo-download_screenshot.png[GitHub repository download button]
+--
++
+[TIP]
+Use [.cmd]`git clone {theme_docs_repo_git} my-asciidocsy-project` to name the containing directory something other than `asciidocsy-docs-www`.
+Or clone normally and freely rename the directory at any time.
+
+. Change to the new directory.
++
+.Example
+ cd my-asciidocsy-project
+
+. Install Ruby dependencies.
++
+ bundle install
++
+If Bundler is not installed, [.cmd]`gem install bundler`, then repeat [.cmd]`bundle install`.
+
+. Generate and serve the demo site.
++
+ bundle exec rake serve
+
+You should now be able to view the site at `http://localhost:4000` in any local browser.
+
+You will find the generated files at `_site/`.
+// end::quickstart-build[]
+
+[WARNING]
+If you wish to generate and serve a version of AsciiDocsy's docs, please DO NOT change the `site.canonical-url` value, as it will harm the search-engine optimization of this site (and yours).
+Please DO make a note in the README and elsewhere linking prominently to the canonical version.
+
+== Exemplary AsciiDocsy
+
+You are welcome to use this implementation of AsciiDocsy as a starting point for your own docs covering your own product.
+
+Learn more about applying AsciiDocsy to your use case in the link:{theme_docs-bootstrapping_www}[Bootstrapping guide].
+
+This documentation repository constitutes a somewhat unconventional Jekyll application.
+Much of the content and data source is derived from a Git submodule reference, treating the AsciiDocsy gem repository itself as a source.
+This enables me to document AsciiDocsy in its own repo.
+It also leaves generating and deploying the docs to a separate repository that is itself a Jekyll/AsciiDocsy application.
+
+This dependency and build process is coordinated by the `Rakefile` in the root of this repo.
+A few *rake* commands initiate the cascade of commands required to assemble the AsciiDocsy docs source, mixing content from the gem repo in with Git-ignored local paths (`content/topics/asciidocsy/`, `_data/subjects/asciidocsy/`)
+
+I recommend using AsciiDocsy in a similar fashion with your own product source.
