@@ -8,7 +8,7 @@ SafeYAML::OPTIONS[:deserialize_symbols] = true
 SafeYAML::OPTIONS[:default_mode] = :safe
 
 @config = YAML.load_file("_config.yml")
-@src_git_ref = 'make-gem'
+@src_git_ref = 'main'
 @src_path    = 'subjects/asciidocsy'
 
 # BUILD TASKS
