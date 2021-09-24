@@ -9,7 +9,23 @@ SafeYAML::OPTIONS[:default_mode] = :safe
 
 @config = YAML.load_file("_config.yml")
 @src_git_ref = 'main'
-@src_path    = 'subjects/asciidocsy'
+@src_path = @config['subjects']['asciidocsy']['paths']['base']
+
+ARGV.each do |arg|
+  if /.*=.*/.match(arg)
+    pair = arg.split('=')
+    key = pair[0]
+    val = pair[1]
+  end
+  case key
+    when 'path'
+      @src_path = val
+    when 'ref'
+      @src_git_ref = val
+    when 'env'
+      @env = val
+  end
+end
 
 # BUILD TASKS
 
@@ -80,23 +96,26 @@ end
 desc "Copy subject source files to untracked 'scratch' paths"
 def migrate_subject_files
   pull_subject_files()
-  puts "Copying source files..."
+  puts "Copying source files from #{@src_path}..."
   paths = @config['subjects']['asciidocsy']['paths']
+  base  = @src_path
   paths.each do |path|
-    p = path[1]
-    src = Dir.glob(p['source'])
-    FileUtils.mkdir_p(p['target']) unless File.directory?(p['target'])
-    FileUtils.cp_r(src, p['target'])
-    FileUtils.cp_r(src, p['target'])
+    unless path[0] == 'base'
+      p = path[1]
+      src = Dir.glob(base + '/' + p['source'])
+      FileUtils.mkdir_p(p['target']) unless File.directory?(p['target'])
+      FileUtils.cp_r(src, p['target'])
+      FileUtils.cp_r(src, p['target'])
+    end
   end
-  FileUtils.cp("#{@src_path}/README.adoc", paths['snippets']['target'])
+  FileUtils.cp("#{base}/README.adoc", paths['snippets']['target'])
 end
 
 desc "Checkout and pull submodule"
 def pull_subject_files
   Dir.chdir("#{@src_path}"){
     puts "Checking out and pulling subject submodule..."
-    %x(git checkout #{@source_git_ref})
+    %x(git checkout #{@src_git_ref})
     %x(git pull)
   }
 end

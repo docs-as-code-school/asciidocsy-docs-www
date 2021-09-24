@@ -34,14 +34,15 @@ docs_tickets_www: https://github.com/DocOps/asciidocsy-jekyll-theme/issues
 subjects:
   asciidocsy:
     paths:
+      base: subjects/asciidocsy
       topics:
-        source: subjects/asciidocsy/_docs/topics/**
+        source: _docs/topics/**
         target: content/topics/asciidocsy
       snippets:
-        source: subjects/asciidocsy/_docs/snippets/**
+        source: _docs/snippets/**
         target: content/snippets/asciidocsy
       data:
-        source: subjects/asciidocsy/lib/asciidocsy/data/**
+        source: lib/asciidocsy/data/**
         target: _data/subjects/asciidocsy
 
 # tag::asciidoctor[]
