@@ -39,7 +39,7 @@ With a link:{theme_docs-environment_www}[Ruby environment in place], these steps
 +
 .Clone
 [subs=+attributes]
- git clone {theme_repo_git}
+ git clone {theme_docs_repo_git}
 +
 .Download & inflate
 --

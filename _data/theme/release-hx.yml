@@ -109,7 +109,7 @@ tags:
     icon: unlink
     tone: warning
   -
-    name: Deprication
+    name: Deprecation
     slug: deprecation
     text: announces future cancelation/removal of feature/capability
     icon: warning

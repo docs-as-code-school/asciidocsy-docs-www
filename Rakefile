@@ -113,11 +113,8 @@ end
 
 desc "Checkout and pull submodule"
 def pull_subject_files
-  Dir.chdir("#{@src_path}"){
-    puts "Checking out and pulling subject submodule..."
-    %x(git checkout #{@src_git_ref})
-    %x(git pull)
-  }
+  puts "Checking out and pulling subject submodules..."
+  %x(git submodule update --recursive --remote)
 end
 
 def targets_map

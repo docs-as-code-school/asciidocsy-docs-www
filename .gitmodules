@@ -1,3 +1,3 @@
 [submodule "theme-gem"]
 	path = subjects/asciidocsy
-	url = git@github.com:DocOps/asciidocsy-jekyll-theme.git
+	url = https://github.com/DocOps/asciidocsy-jekyll-theme

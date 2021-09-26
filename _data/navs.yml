@@ -17,7 +17,7 @@ header:
         - text: Doc Ops
           href: https://github.com/docops
     - text: Releases
-      href: /releases
+      href: /docs/theme/history
 
 footer:
   columns:
